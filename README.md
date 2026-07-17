@@ -1,4 +1,4 @@
-# Daedalus-Digest_2
+
 # Daedalus Digest
 
 A free, open-source daily research briefing that lands in your inbox every morning — automatically.
