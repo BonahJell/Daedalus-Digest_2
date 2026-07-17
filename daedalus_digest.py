@@ -272,7 +272,7 @@ def build_html(sections, date_str, client):
   <div style="padding:48px 52px;text-align:center;border-top:1px solid #1a2235;">
     <div style="font-family:Georgia,serif;font-size:28px;color:#1e2535;font-style:italic;margin-bottom:12px;">DD</div>
     <div style="font-family:'Courier New',monospace;font-size:9px;letter-spacing:4px;color:#1f2937;text-transform:uppercase;">
-      {DIGEST_NAME} &nbsp;·&nbsp; {date_str} &nbsp;·&nbsp; github.com/BonahJell/daedalus-digest
+      {DIGEST_NAME} &nbsp;·&nbsp; {date_str} &nbsp;·&nbsp; github.com/YOUR_USERNAME/daedalus-digest
     </div>
   </div>
 
