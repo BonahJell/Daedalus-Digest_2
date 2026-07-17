@@ -1,0 +1,41 @@
+name: Daedalus Digest
+
+on:
+  schedule:
+    - cron: '0 11 * * *'  # 6am CST = 11am UTC. Change this to your timezone.
+  workflow_dispatch:        # lets you trigger manually from the Actions tab
+
+permissions:
+  contents: write           # needed to save seen_papers.json back to the repo
+
+jobs:
+  send-digest:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install anthropic
+
+      - name: Run digest
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          TO_EMAIL: ${{ secrets.TO_EMAIL }}
+        run: python daedalus_digest.py
+
+      - name: Save memory of sent papers
+        run: |
+          git config user.name "Daedalus Digest Bot"
+          git config user.email "bot@daedalus.digest"
+          git add seen_papers.json
+          git diff --staged --quiet || git commit -m "chore: update seen papers memory"
+          git push
